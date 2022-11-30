@@ -11,10 +11,12 @@ echo "Test connection to mainframe"
 ol test connection --base-url http://mainframe.openlegacy.com --port 12345 --uri-map /ol/demos
 
 echo "Add Assets to the module and test them"
+echo "Add an Asset via a cobol source"
 ol add --source-path ../resources/OACTCS9.cbl --program-path OACTCS9
 cp ../resources/test-json/oactcs9.json
 ol test asset oactcs9
 
+echo "Add Assets via a cobol copy books"
 ol add -i ../resources/GACTCS9I.cpy -o ../resources/GACTCS9O.cpy --program-path GACTCS9
 cp ../resources/test-json/gactcs9.json
 ol test asset gactcs9
