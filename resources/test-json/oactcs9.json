@@ -1,0 +1,16 @@
+{
+    "dfhcommarea": {
+        "inPut": {
+            "actiAccountId": "69941327752",
+            "actiCustomerId": "1002200230024992",
+            "actiCustomerName": "John Doe",
+            "actiTypcd": "P",
+            "actiSubTypcd": "MM",
+            "actiCntryCd": "US",
+            "actiBnkId": "0002",
+            "actiBrnchId": "1334",
+            "actiInitialDeposit": 3.99,
+            "actiCurrency": "USD"
+        }
+    }
+}

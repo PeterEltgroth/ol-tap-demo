@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ol-tap-demo
+  description: OpenLegacy CICS Demo
+  links:
+    - url: https://github.com/PeterEltgroth/ol-tap-demo.git
+      title: GitHub Repo
+  annotations:
+    "backstage.io/kubernetes-label-selector": "app.kubernetes.io/part-of=ol-tap-demo"
+spec:
+  type: service
+  lifecycle: experimental
+  owner: demo-team
