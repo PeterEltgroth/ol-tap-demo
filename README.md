@@ -11,9 +11,7 @@ A *nix compatible environment with a `bash` shell
    - If you need an extendtion beyond 60 days for now contact: [peltgroth@vmware.com](mailto:peltgroth@vmware.com)
 3. Java 11 or higher
 4. Install [Gradle](https://gradle.org/install/)
-5. Install OpenLegacy CLI
-   1. [Mac OS](https://hub-support.openlegacy.com/en/article/install-openlegacy-cli-mac-1610991)
-   2. [Windows](https://hub-support.openlegacy.com/en/article/install-openlegacy-cli-windows-2890217)
+5. Install [OpenLegacy CLI](https://hub-support.openlegacy.com/en/install-and-log-in)
 6. Clone down this repository.
 
 ## Create the OpenLegacy Hub Project
