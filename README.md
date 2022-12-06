@@ -2,17 +2,17 @@
 
 ## Assumptions
 
-A *nix compatible environment with a `bash` shell
+A *nix compatible environment with a `bash` shell.
 
 ## Pre-requisites
 
-1. A [Tanzu Application Platform 1.3.x](https://network.tanzu.vmware.com/products/tanzu-application-platform/) installation.
+1. A [Tanzu Application Platform 1.3.x](https://network.tanzu.vmware.com/products/tanzu-application-platform/) installation
 2. Sign up for the free [OpenLegacy 60 day trial](https://app.ol-hub.com/auth/sign-up)
    - If you need an extendtion beyond 60 days for now contact: [peltgroth@vmware.com](mailto:peltgroth@vmware.com)
 3. Java 11 or higher
 4. Install [Gradle](https://gradle.org/install/)
 5. Install [OpenLegacy CLI](https://hub-support.openlegacy.com/en/install-and-log-in)
-6. Clone down this repository.
+6. Clone down this repository
 
 ## Create the OpenLegacy Hub Project
 
@@ -21,7 +21,7 @@ A *nix compatible environment with a `bash` shell
 3. Login to [ol cli](https://hub-support.openlegacy.com/en/article/generate-api-keys-5957463): `ol login`
 4. From this directory
       1. Allow execute on [ol-project.sh](ol-project.sh): `chmod +x ol-project.sh`
-      2. Run `./ol-project.sh` to create the demo OpenLegacy Module, Assets, and Project.
+      2. Run `./ol-project.sh` to create the demo OpenLegacy Module, Assets, and Project
 5. Go to the Project and click **Generate Service**
 ![Generate Service image](images/Generate-Service.png)
 1. Select SPRING-JAVA-REST
@@ -48,9 +48,9 @@ tanzu app wld apply demo-ol-cics \ # Or replace demo-ol-cics with your name
 --param-yaml api_descriptor='{"type":"openapi","description":"Open Legacy generated CICS APIs.","owner":"demo-team","system":"ol-tap-demo","location":{"path":"/openapi/openapi.yaml"}}'
 ```
 ## Add the Catalog
-1. See [Add your application to the Tanzu Application Platform GUI software catalog](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-getting-started-deploy-first-app.html#add-your-application-to-tanzu-application-platform-gui-software-catalog-3).
+1. See [Add your application to the Tanzu Application Platform GUI software catalog](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-getting-started-deploy-first-app.html#add-your-application-to-tanzu-application-platform-gui-software-catalog-3)
 2. For the **Repository URL** use: `https://github.com/PeterEltgroth/ol-tap-demo/blob/main/catalog/catalog-info.yaml`
-3. After registering return to the home page to confirm registration.
+3. After registering return to the home page to confirm registration
 
 ![Component list image](images/Component-list.png)
 
@@ -76,7 +76,7 @@ Note: To enable **TRY IT OUT** the application must have [CORS set to allow requ
 From the ol-tap-demo Component:
 1. Click the **Runtime Resources** tab
 2. Click the *Running* pod name, for example `demo-ol-cics-00001-deployment-58ff97468f-69986`
-3. Scroll down to the **Live View** section.
+3. Scroll down to the **Live View** section
 
 ### Details
 ![App Live View Details image](images/Pod-App-Live-View-Details.png)
@@ -91,6 +91,13 @@ From the ol-tap-demo Component:
 
 #### Log Levels
 ![App Live View Log Levels image](images/Pod-App-Live-View-Log-Levels.png)
+
+## Cleanup
+
+1. Allow execute on [cleanup.sh](cleanup.sh): `chmod +x cleanup.sh`
+2. Run `./cleanup.sh`
+3. Unregister the ol-tap-demo component
+![Unregister image](images/Unregister.png)
 ## References
 
 - [OpenLegacy Public Hub Demos Repo - CICS samples](https://github.com/openlegacy/openlegacy-public-hub-demos/tree/master/mainframe-cics)
