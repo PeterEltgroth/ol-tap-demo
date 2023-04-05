@@ -8,7 +8,7 @@ ol create module --connector mf-cics-cobol $name
 cd $name
 
 echo "Test connection to mainframe"
-ol test connection --base-url http://mainframe.openlegacy.com --port 12345 --uri-map /ol/demos
+ol test connection --base-url http://mainframe.openlegacy.com --port 12344 --uri-map /ol/demos
 
 echo "Add Assets to the module and test them"
 echo "Add an Asset via a cobol source"
