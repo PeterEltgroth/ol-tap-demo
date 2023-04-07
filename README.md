@@ -6,7 +6,7 @@ A *nix compatible environment with a `bash` shell.
 
 ## Pre-requisites
 
-1. A [Tanzu Application Platform 1.3.x](https://network.tanzu.vmware.com/products/tanzu-application-platform/) installation
+1. A [Tanzu Application Platform 1.4.x](https://network.tanzu.vmware.com/products/tanzu-application-platform/) installation
 2. Sign up for the free [OpenLegacy 60 day trial](https://app.ol-hub.com/auth/sign-up)
    - If you need an extendtion beyond 60 days for now contact: [peltgroth@vmware.com](mailto:peltgroth@vmware.com)
 3. Java 11 or higher
@@ -24,13 +24,14 @@ A *nix compatible environment with a `bash` shell.
       2. Run `./ol-project.sh` to create the demo OpenLegacy Module, Assets, and Project
 5. Go to the Project and click **Generate Service**
 ![Generate Service image](images/Generate-Service.png)
-1. Select SPRING-JAVA-REST
+6. Select SPRING-JAVA-REST
 ![SPRING-JAVA-REST image](images/SPRING-JAVA-REST.png)
-1. Download the Service
+7. Download the Service
 ![Download Generated image](images/Download.png)
-1. Unzip: `unzip <my-project>.zip -d <destination-directory>`
-2. `cd` into the unzipped destination directory
-3.  Optional: Run `gradle bootRun` and check [localhost:8080/openapi/index.html](localhost:8080/openapi/index.html?url=/openapi/openapi.yaml)
+    - With an higher OpenLegacy License these manual steps could be done using `ol generate`
+8. Unzip: `unzip <my-project>.zip -d <destination-directory>`
+9. `cd` into the unzipped destination directory
+10.  Optional: Run `gradle bootRun` and check [localhost:8080/openapi/index.html](localhost:8080/openapi/index.html?url=/openapi/openapi.yaml)
 ![OpenAPI GUI](images/OpenAPI-local.png)
 
 ## Deploy into Tanzu Application Platform
@@ -47,6 +48,31 @@ tanzu app wld apply demo-ol-cics \ # Or replace demo-ol-cics with your name
 --label apis.apps.tanzu.vmware.com/register-api="true" \
 --param-yaml api_descriptor='{"type":"openapi","description":"Open Legacy generated CICS APIs.","owner":"demo-team","system":"ol-tap-demo","location":{"path":"/openapi/openapi.yaml"}}'
 ```
+
+### NOTE
+
+By default the OpenLegacy generator:
+- Limits the exposed actuator endpoints and data for security. This also limits the data available to Application Live View.
+- Does not enable Cross Origin Resource Sharing, which prevents the TAP GUI API Explorer from execute the REST APIs. 
+
+To demonstrate these capabilities modify the `management` section of `src/main/resources/application.yml` as shown below.
+ 
+
+```yaml
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      cors:
+        allowed-origins-patterns: "https://*.<your-tap-domain>"
+        allowed-methods: "GET,POST"
+      exposure:
+        include: "*"
+```
+
+
 ## Add the Catalog
 1. See [Add your application to the Tanzu Application Platform GUI software catalog](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-getting-started-deploy-first-app.html#add-your-application-to-tanzu-application-platform-gui-software-catalog-3)
 2. For the **Repository URL** use: `https://github.com/PeterEltgroth/ol-tap-demo/blob/main/catalog/catalog-info.yaml`
