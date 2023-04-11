@@ -12,7 +12,8 @@ A *nix compatible environment with a `bash` shell.
 3. Java 11 or higher
 4. Install [Gradle](https://gradle.org/install/)
 5. Install [OpenLegacy CLI](https://hub-support.openlegacy.com/en/install-and-log-in)
-6. Clone down this repository
+6. Install [Docker](https://docs.docker.com/engine/install/)
+7. Clone down this repository
 
 ## Create the OpenLegacy Hub Project
 
