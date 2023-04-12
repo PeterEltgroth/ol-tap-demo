@@ -50,27 +50,6 @@ tanzu app wld apply demo-ol-cics \ # Or replace demo-ol-cics with your name
 --param-yaml api_descriptor='{"type":"openapi","description":"Open Legacy generated CICS APIs.","owner":"demo-team","system":"ol-tap-demo","location":{"path":"/openapi/openapi.yaml"}}'
 ```
 
-### NOTE
-
-By default the OpenLegacy generator:
-- Limits the exposed actuator endpoints and data for security. This also limits the data available to Application Live View.
-- Does not enable Cross Origin Resource Sharing, which prevents the TAP GUI API Explorer from execute the REST APIs. 
-
-To demonstrate these capabilities modify the `management` section of `src/main/resources/application.yml` as shown below.
- 
-
-```yaml
-management:
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-```
-
-
 ## Add the Catalog
 1. See [Add your application to the Tanzu Application Platform GUI software catalog](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-getting-started-deploy-first-app.html#add-your-application-to-tanzu-application-platform-gui-software-catalog-3)
 2. For the **Repository URL** use: `https://github.com/PeterEltgroth/ol-tap-demo/blob/main/catalog/catalog-info.yaml`
@@ -88,19 +67,70 @@ management:
 
 ### API Definition
 
-Note: To enable **TRY IT OUT** the application must have [CORS set to allow requests from TAP GUI](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-api-auto-registration-usage.html#setting-up-cors-for-openapi-specifications-5). If CORS is not configured the OpenAPI can be tried directly from the application, for example: `https://demo-ol-cics.<namespace>.<my-domain>/openapi/index.html`
-
 ![API Definition image](images/API-Definition.png)
+
+Note: To enable **TRY IT OUT** the application must have [CORS configured to allow requests from TAP GUI](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-api-auto-registration-usage.html#setting-up-cors-for-openapi-specifications-5). If CORS is not configured try the REST APIs directly at:
+
+`https://demo-ol-cics.<namespace>.<your-domain>/openapi/index.html`
+
+---
+
+To configure CORS create this class in `src/main/java/com/openlegacy/WebConfig.java`:
+
+```java
+package com.openlegacy;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.config.CorsRegistry;
+import org.springframework.web.reactive.config.EnableWebFlux;
+import org.springframework.web.reactive.config.WebFluxConfigurer;
+
+@Configuration
+@EnableWebFlux
+public class WebConfig implements WebFluxConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+
+        registry.addMapping("/*")
+            .allowedOrigins("https://tap-gui.full.tap.isveng.com")
+            .allowedMethods("POST", "OPTIONS")
+            .allowedHeaders("*");
+    }
+}
+```
+
+---
+
 ### Component
 ![Component image](images/Component.png)
+
 ### Application Live View
 
 [Application Live View docs](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-app-live-view-about-app-live-view.html)
 
 From the ol-tap-demo Component:
-1. Click the **Runtime Resources** tab
-2. Click the *Running* pod name, for example `demo-ol-cics-00001-deployment-58ff97468f-69986`
-3. Scroll down to the **Live View** section
+1. Click the *Runtime Resources* tab
+2. Click the *Running* pod name, for example `demo-ol-cics-00001-deployment-<hash>`
+3. Scroll down to the *Live View* section
+
+---
+**NOTE:**
+
+By default the exposed actuator endpoints and data are restricted. To demonstrate the full capabilties of *Application Live View* modify the `management` section of `src/main/resources/application.yml` to be:
+
+```yaml
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+```
+
+---
 
 ### Details
 ![App Live View Details image](images/Pod-App-Live-View-Details.png)
