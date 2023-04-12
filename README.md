@@ -66,9 +66,6 @@ management:
       show-details: always
   endpoints:
     web:
-      cors:
-        allowed-origins-patterns: "https://*.<your-tap-domain>"
-        allowed-methods: "GET,POST"
       exposure:
         include: "*"
 ```
