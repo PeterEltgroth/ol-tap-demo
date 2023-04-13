@@ -4,7 +4,7 @@
 
 A *nix compatible environment with a `bash` shell.
 
-## Pre-requisites
+## Prerequisites
 
 1. A [Tanzu Application Platform 1.4.x](https://network.tanzu.vmware.com/products/tanzu-application-platform/) installation
 2. Sign up for the free [OpenLegacy 60 day trial](https://app.ol-hub.com/auth/sign-up)
